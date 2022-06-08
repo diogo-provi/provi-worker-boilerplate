@@ -1,6 +1,13 @@
-export type QueueParams = {
+export type QueueConfigurations = {
   queueUrl: string;
-  maxNumberOfMessages?: number;
-  visibilityTimeout?: number;
-  waitTimeSeconds?: number;
+};
+
+export type QueueConsumerParams = QueueConfigurations & {
+  chunkSize?: number;
+};
+
+export type QueueProducerParams = QueueConfigurations & {
+  messageBody: object;
+  messageGroupId: string;
+  messageDeduplicationId?: string;
 };

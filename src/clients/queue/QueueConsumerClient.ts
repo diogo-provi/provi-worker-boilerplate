@@ -1,5 +1,10 @@
-import { QueueParams } from "./QueueTypes";
+import { Message } from "aws-sdk/clients/sqs";
+import { Consumer } from "sqs-consumer";
+import { QueueConsumerParams } from "./QueueTypes";
 
 export default interface QueueConsumerClient {
-  receiveMessage(params: QueueParams, execute: Function): Promise<any>;
+  create(
+    params: QueueConsumerParams,
+    execute: (message: Message) => Promise<void>
+  ): Consumer;
 }
