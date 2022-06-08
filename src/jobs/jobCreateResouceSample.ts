@@ -20,6 +20,18 @@ export default class JobCreateResourceSample implements BaseJob {
   }
 
   private async handler(message: Message): Promise<void> {
-    console.log(message);
+    return new Promise((resolve, reject) => {
+      try {
+        const messageBody = JSON.parse(message.Body || "");
+        console.log(`Mensagem capturada: ${messageBody.id}`);
+        const key = Math.floor(Math.random() * 5 + 1);
+        console.log(`Falhou? ${key === 1}`);
+        if (key === 1) throw new Error();
+        console.log(`\n-------------------------------\n`);
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 }

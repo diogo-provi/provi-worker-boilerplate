@@ -7,16 +7,18 @@ class Producer {
   public async execute() {
     const queueUrl = getQueueUrl();
     const producer = new QueueProducerClientSQS();
-    const payload = {
-      id: crypto.randomUUID(),
-      message: crypto.randomUUID(),
-    };
-    const params = {
-      queueUrl,
-      messageBody: payload,
-      messageGroupId: "default",
-    } as QueueProducerParams;
-    await producer.sendMessage(params);
+    for (let i = 0; i < 5; i++) {
+      const payload = {
+        id: crypto.randomUUID(),
+        message: crypto.randomUUID(),
+      };
+      const params = {
+        queueUrl,
+        messageBody: payload,
+        messageGroupId: "default",
+      } as QueueProducerParams;
+      await producer.sendMessage(params);
+    }
   }
 }
 
