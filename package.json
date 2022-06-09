@@ -10,26 +10,20 @@
   "scripts": {
     "clean": "rimraf dist/",
     "build": "npm run clean && tsc",
-    "dev": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/consumer.ts",
+    "consumer:dev": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/consumer.ts",
+    "producer:dev": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/producer.ts",
     "producer": "node dist/producer.js",
     "consumer": "node dist/consumer.js",
-    "consumer:all": "concurrently --kill-others \"yarn consumer\" \"yarn consumer\" \"yarn consumer\"",
-    "lint": "tsc --noEmit && eslint . && npm run clean",
-    "publish": "npm publish",
-    "prepublish": "npm run clean && npm run build",
-    "postpublish": "npm run clean"
+    "lint": "tsc --noEmit && eslint . && npm run clean"
   },
   "dependencies": {
-    "@types/module-alias": "^2.0.1",
     "aws-sdk": "^2.1149.0",
-    "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "rimraf": "^3.0.2",
     "sqs-consumer": "^5.7.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.39",
-    "concurrently": "^7.2.1",
     "eslint": "^8.16.0",
     "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-plugin-import": "^2.26.0",

@@ -15,11 +15,14 @@ export default class QueueConsumerClientSQS implements QueueConsumerClient {
       sqs: new AWS.SQS({ apiVersion: "2012-11-05" }),
       handleMessage: execute,
       batchSize: chunkSize || 10,
+      visibilityTimeout: 2,
+      heartbeatInterval: 1,
     });
 
     clientConsumer.on("error", (error) => console.log(error));
     clientConsumer.on("processing_error", (error) => console.log(error));
     clientConsumer.on("timeout_error", (error) => console.log(error));
+    clientConsumer.on("empty", () => console.log("Queue is empty"));
 
     return clientConsumer;
   }
